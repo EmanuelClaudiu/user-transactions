@@ -1,0 +1,16 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/UserTransactions/.vs
+/UserTransactions/YourProject.Infrastructure/obj
+/UserTransactions/UserTransactions.Infrastructure/bin/Debug/net8.0
+/UserTransactions/UserTransactions.Domain/bin/Debug/net8.0
+/UserTransactions/UserTransactions.Application/bin/Debug/net8.0
+/UserTransactions/UserTransactions/bin/Debug/net8.0
+/UserTransactions/UserTransactions/obj
+/UserTransactions/UserTransactions.Application/obj
+/UserTransactions/UserTransactions.Domain/obj
+/UserTransactions/UserTransactions.Infrastructure/obj
+/UserTransactions.Infrastructure
+/UserTransactions/UserTransactions/UserTransactions.API.csproj.user
