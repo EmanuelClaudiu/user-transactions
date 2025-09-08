@@ -2,6 +2,7 @@
 using UserTransactions.Application.DTOs;
 using UserTransactions.Application.Interfaces;
 using UserTransactions.Domain.Entities;
+using UserTransactions.Domain.Enums;
 using UserTransactions.Infrastructure.Interfaces;
 
 namespace UserTransactions.Application.Services
@@ -41,6 +42,28 @@ namespace UserTransactions.Application.Services
             var newTransaction = await _transactionsRepository.AddAsync(transaction);
 
             return _mapper.Map<TransactionDTO>(newTransaction);
+        }
+
+        public async Task<decimal> CalculateTotalAmountForUserAsync(string userId)
+        {
+            // user validation can be done here
+            // for simplicity, will return 0 for non existing user
+
+            return await _transactionsRepository.GetTotalAmountForUserAsync(userId);
+        }
+
+        public async Task<decimal> CalculateTotalAmountForTransactionTypeAsync(TransactionTypeEnum transactionType)
+        {
+            // transaction type validation can be done here
+            // for simplicity, will return 0 for invalid transaction type
+
+            return await _transactionsRepository.GetTotalAmountForTransactionTypeAsync(transactionType);
+        }
+
+        public async Task<IEnumerable<TransactionDTO>> GetTransactionsOverTresholdAsync(decimal treshold)
+        {
+            var transactions = await _transactionsRepository.GetTransactionsOverTresholdAsync(treshold);
+            return _mapper.Map<IEnumerable<TransactionDTO>>(transactions);
         }
     }
 }

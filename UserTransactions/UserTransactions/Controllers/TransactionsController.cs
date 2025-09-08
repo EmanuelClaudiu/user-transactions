@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserTransactions.Application.DTOs;
 using UserTransactions.Application.Interfaces;
-using UserTransactions.Application.Services;
+using UserTransactions.Domain.Enums;
 
 namespace UserTransactions.API.Controllers
 {
@@ -24,7 +24,7 @@ namespace UserTransactions.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TransactionDTO>> GetById(int id)
+        public async Task<ActionResult<TransactionDTO?>> GetById(int id)
         {
             var transaction = await _transactionService.GetTransactionByIdAsync(id);
             return transaction;
@@ -35,6 +35,25 @@ namespace UserTransactions.API.Controllers
         {
             var transaction = await _transactionService.AddTransactionAsync(transactionCreateDto);
             return transaction;
+        }
+
+        [HttpGet("CalculateTransactionsAmountForUser/{id}")]
+        public async Task<ActionResult<decimal>> CalculateTransactionsAmountForUser(string id)
+        {
+            return await _transactionService.CalculateTotalAmountForUserAsync(id);
+        }
+
+        [HttpGet("CalculateTransactionsAmountForType/{transactionType}")]
+        public async Task<ActionResult<decimal>> CalculateTransactionsAmountForUser(TransactionTypeEnum transactionType)
+        {
+            return await _transactionService.CalculateTotalAmountForTransactionTypeAsync(transactionType);
+        }
+
+        [HttpGet("GetTransactionsOverTreshold/{treshold}")]
+        public async Task<ActionResult<IEnumerable<TransactionDTO>>> GetTransactionsOverTreshold(decimal treshold)
+        {
+            var transactions = await _transactionService.GetTransactionsOverTresholdAsync(treshold);
+            return transactions.ToList();
         }
     }
 }
