@@ -10,7 +10,7 @@ namespace UserTransactions.Infrastructure.Repositories
         public UserRepository(ApplicationDbContext dbContext) : base(dbContext) { }
         public async Task<User?> GetByIdAsync(string id)
         {
-            return await _dbContext.Set<User>().FirstOrDefaultAsync(user => user.UserId == id);
+            return await _dbContext.Set<User>().AsNoTracking().FirstOrDefaultAsync(user => user.UserId == id);
         }
 
         public async Task DeleteByIdAsync(string id)

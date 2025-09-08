@@ -2,6 +2,7 @@
 using UserTransactions.Application.DTOs;
 using UserTransactions.Application.Interfaces;
 using UserTransactions.Domain.Entities;
+using UserTransactions.Domain.Exceptions;
 using UserTransactions.Infrastructure.Interfaces;
 
 namespace UserTransactions.Application.Services
@@ -19,16 +20,12 @@ namespace UserTransactions.Application.Services
         public async Task<IEnumerable<UserDTO>> GetAllUsersAsync()
         {
             var users = await _userRepository.GetAllAsync();
-
             return _mapper.Map<IEnumerable<UserDTO>>(users);
         }
 
-        public async Task<UserDTO> GetUserByIdAsync(string id)
+        public async Task<UserDTO?> GetUserByIdAsync(string id)
         {
             var user = await _userRepository.GetByIdAsync(id);
-
-            // *raise if not found*
-
             return _mapper.Map<UserDTO>(user);
         }
         public async Task<UserDTO> AddUserAsync(UserUpsertDTO userUpsertDto)
@@ -44,7 +41,10 @@ namespace UserTransactions.Application.Services
 
         public async Task<UserDTO> EditUserAsync(string id, UserUpsertDTO userUpsertDto)
         {
-            // check user exists
+            if ((await GetUserByIdAsync(id)) == null)
+            {
+                throw new UserNotFoundException($"[USER_UPDATE] User with id: {id} not found.");
+            }
 
             var userDto = _mapper.Map<UserDTO>(userUpsertDto);
             userDto.UserId = id;
@@ -52,11 +52,14 @@ namespace UserTransactions.Application.Services
             var user = _mapper.Map<User>(userDto);
             await _userRepository.UpdateAsync(user);
 
-            return await GetUserByIdAsync(user.UserId);
+            return userDto;
         }
         public async Task DeleteUserByIdAsync(string id)
         {
-            // check user exists
+            if ((await GetUserByIdAsync(id)) == null)
+            {
+                throw new UserNotFoundException($"[DELETE_USER] User with id: {id} not found.");
+            }
 
             await _userRepository.DeleteByIdAsync(id);
         }

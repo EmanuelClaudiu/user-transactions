@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using UserTransactions.API.Middlewares;
 using UserTransactions.Application.Interfaces;
 using UserTransactions.Application.Mappers;
 using UserTransactions.Application.Services;
@@ -28,5 +29,6 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseMiddleware<GlobalExceptionHandler>();
 
 app.Run();
