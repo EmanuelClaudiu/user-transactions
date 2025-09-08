@@ -17,6 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTransactions.Domain", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTransactions.Infrastructure", "UserTransactions.Infrastructure\UserTransactions.Infrastructure.csproj", "{70AF45E7-BE0E-475F-9797-7CBBA8403CDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTransactions.UnitTests", "UserTransactions.UnitTests\UserTransactions.UnitTests.csproj", "{B63F647E-2F89-4191-A4F2-A8348E9D0DD2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{70AF45E7-BE0E-475F-9797-7CBBA8403CDC} = {70AF45E7-BE0E-475F-9797-7CBBA8403CDC}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +44,10 @@ Global
 		{70AF45E7-BE0E-475F-9797-7CBBA8403CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70AF45E7-BE0E-475F-9797-7CBBA8403CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70AF45E7-BE0E-475F-9797-7CBBA8403CDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B63F647E-2F89-4191-A4F2-A8348E9D0DD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B63F647E-2F89-4191-A4F2-A8348E9D0DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B63F647E-2F89-4191-A4F2-A8348E9D0DD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B63F647E-2F89-4191-A4F2-A8348E9D0DD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
