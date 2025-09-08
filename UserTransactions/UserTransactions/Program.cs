@@ -3,6 +3,7 @@ using UserTransactions.API.Middlewares;
 using UserTransactions.Application.Interfaces;
 using UserTransactions.Application.Mappers;
 using UserTransactions.Application.Services;
+using UserTransactions.Application.Validators;
 using UserTransactions.Infrastructure.Data;
 using UserTransactions.Infrastructure.Interfaces;
 using UserTransactions.Infrastructure.Repositories;
@@ -19,6 +20,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITransactionsRepository, TransactionRepository>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<ITransactionValidator, TransactionValidator>();
 
 builder.Services.AddAutoMapper(cfg => { }, typeof(AutomapperMappingProfile));
 

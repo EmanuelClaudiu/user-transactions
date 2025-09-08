@@ -6,8 +6,9 @@ namespace UserTransactions.Infrastructure.Data
     public class ApplicationDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
-        public string DbConnString { get; }
+        private string DbConnString { get; }
         public ApplicationDbContext()
         {
             // connection details ought to be pulled from a safer place (i.e. env variables, secrets, etc.)

@@ -12,6 +12,11 @@ namespace UserTransactions.Application.Mappers
             CreateMap<UserDTO, User>();
 
             CreateMap<UserUpsertDTO, UserDTO>();
+
+            CreateMap<Transaction, TransactionDTO>();
+            CreateMap<TransactionDTO, Transaction>();
+
+            CreateMap<TransactionCreateDTO, TransactionDTO>();
         }
     }
 }

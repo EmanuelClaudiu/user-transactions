@@ -12,6 +12,7 @@ namespace UserTransactions.API.Middlewares
         static GlobalExceptionHandler()
         {
             HttpCodeBasedOnExceptionType[typeof(UserNotFoundException)] = HttpStatusCode.NotFound;
+            HttpCodeBasedOnExceptionType[typeof(InvalidTransactionObjectException)] = HttpStatusCode.BadRequest;
         }
         public async Task InvokeAsync(HttpContext context)
         {
